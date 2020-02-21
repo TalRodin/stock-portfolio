@@ -1,11 +1,15 @@
 import React from 'react'
+import NavItem from './Navitem'
 
-const NavItem = ({link, children}) =>{
+const NavItems = () =>{
     return (
-        <li>
-            <a href={link}>{children}</a>
-        </li>
+        <nav>
+            <ul>
+                <NavItem link='/'>Transactions</NavItem>
+                <NavItem link='/portfolio'>Portfolio</NavItem>
+            </ul>
+        </nav>
     )
 }
 
-export default NavItem
+export default NavItems
