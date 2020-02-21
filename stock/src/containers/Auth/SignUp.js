@@ -5,6 +5,9 @@ import Input from '../../components/UI/Input'
 import Button from '../../components/UI/Button'
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions'
+import Message from '../../components/UI/Message'
+
+
 
 const SignUpSchema = Yup.object().shape({
     firstName:Yup.string().required('Your first name is required')
@@ -21,7 +24,9 @@ const SignUpSchema = Yup.object().shape({
     .required('You need to confirm your password.')
 })
 
-const SignUp = ({signUp}) =>{
+const SignUp = ({signUp, loading, error}) =>{
+
+    console.log(error)
     return (
         <div>
             <Formik
@@ -34,15 +39,17 @@ const SignUp = ({signUp}) =>{
             }}
             validationSchema={SignUpSchema}
             onSubmit={
-                (values, {setSubmitting})=>
+                async( values, {setSubmitting})=>
                 {
                     console.log(values)
-                    signUp(values)
+                    await signUp(values)
                     setSubmitting(false) 
                 }
             
             }
-            >{({isSubmitting, isValid})=>(
+            >{({isSubmitting, isValid})=>
+            
+            (
                 <Form>
                 <Field type='firstName'
                        name='firstName'
@@ -74,15 +81,19 @@ const SignUp = ({signUp}) =>{
                 <ErrorMessage name='confirmPassword'/>
 
 
-                <Button disabled={!isValid} type="submit">SignUp</Button>
+                <Button disabled={!isValid || isSubmitting} loading={loading ? 'Signing up' : null} type="submit">SignUp</Button>
+                <Message >{error}</Message>
             </Form>
             )}
+            
            
             </Formik>
         </div>
     )
 }
-const mapStateToProps = (state) =>({
+const mapStateToProps = ({auth}) =>({
+    loading:auth.loading,
+    error:auth.error
 
 })
 const mapDispatchToProps ={

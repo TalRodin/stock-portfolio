@@ -1,8 +1,11 @@
+  import * as actions from './authTypes';
+
 export const signUp = data => async (dispatch,
     getState,
     { getFirebase, getFirestore })=>{
         const firebase = getFirebase();
         const firestore = getFirestore();
+        dispatch({type:actions.AUTH_START})
     try{
         const res = await firebase
         .auth()
@@ -13,5 +16,9 @@ export const signUp = data => async (dispatch,
         firstName:data.firstName,
         lastName:data.lastName
     })
-    }catch(err){}
+    dispatch({type: actions.AUTH_SUCCESS})
+    }catch(err){
+        dispatch({type:actions.AUTH_FAIL, payload: err.message})
+    }
+    dispatch({type: actions.AUTH_END})
 }

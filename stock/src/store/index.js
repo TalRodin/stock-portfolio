@@ -8,6 +8,7 @@ import rootReducer from './reducers'
 const rrfConfig ={
   userProfile: 'users',
   useFirestoreForProfile: true,
+  
 }
 
 
