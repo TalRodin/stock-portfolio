@@ -1,13 +1,13 @@
 import React from 'react'
 import Logo from './Logo'
-import NavItmes from './Navitems'
+import NavItems from './Navitems'
 
 const Navbar = ()=>{
     return (
         <div>
         <Logo />
 
-        <NavItmes />
+        <NavItems />
         </div>
     )
 }

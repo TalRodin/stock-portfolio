@@ -3,6 +3,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import Layout from './layout/Layout'
 import Portfolio from './containers/Portfolio'
 import Transactions from './containers/Transactions'
+
 const App = () => {
     return (
     <Layout>
