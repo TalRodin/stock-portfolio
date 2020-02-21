@@ -3,7 +3,8 @@ import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import Input from '../../components/UI/Input'
 import Button from '../../components/UI/Button'
-
+import {connect} from 'react-redux'
+import * as actions from '../../store/actions'
 
 const SignUpSchema = Yup.object().shape({
     firstName:Yup.string().required('Your first name is required')
@@ -14,13 +15,13 @@ const SignUpSchema = Yup.object().shape({
     .email('Invalid email.')
     .required('The email is required.'),
     password: Yup.string()
-    .required('The password is required.'),
+    .required('The password is required.').min(8,'The password is too short'),
     confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'),null], 'Password does not match')
     .required('You need to confirm your password.')
 })
 
-const SignUp = () =>{
+const SignUp = ({signUp}) =>{
     return (
         <div>
             <Formik
@@ -36,6 +37,8 @@ const SignUp = () =>{
                 (values, {setSubmitting})=>
                 {
                     console.log(values)
+                    signUp(values)
+                    setSubmitting(false) 
                 }
             
             }
@@ -79,4 +82,11 @@ const SignUp = () =>{
         </div>
     )
 }
-export default SignUp
+const mapStateToProps = (state) =>({
+
+})
+const mapDispatchToProps ={
+    signUp: actions.signUp
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp)
