@@ -1,12 +1,13 @@
 import React from 'react'
 import NavItem from './Navitem'
 
-const NavItems = () =>{
+const NavItems = ({clicked}) =>{
     return (
         <nav>
             <ul>
-                <NavItem link='/'>Transactions</NavItem>
-                <NavItem link='/portfolio'>Portfolio</NavItem>
+                <NavItem clicked={clicked} link='/'>Transactions</NavItem>
+                <NavItem clicked={clicked} link='/portfolio'>Portfolio</NavItem>
+                <NavItem clicked={clicked} link='/login'>Login</NavItem>
             </ul>
         </nav>
     )
