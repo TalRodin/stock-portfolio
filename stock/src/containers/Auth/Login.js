@@ -2,6 +2,8 @@ import React from 'react'
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import Input from '../../components/UI/Input'
+import Button from '../../components/UI/Button'
+
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -43,7 +45,7 @@ const Login = () =>{
                        placeholder='Your password...'
                        component={Input} />
                 <ErrorMessage name='password'/>
-                <button type="submit">Submit</button>
+                <Button disabled={!isValid} type="submit">Login</Button>
             </Form>
             )}
            

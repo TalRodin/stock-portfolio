@@ -4,6 +4,7 @@ import Layout from './layout/Layout'
 import Portfolio from './containers/Portfolio'
 import Transactions from './containers/Transactions'
 import Login from './containers/Auth/Login'
+import SignUp from './containers/Auth/SignUp'
 const App = () => {
     return (
     <Layout>
@@ -11,6 +12,7 @@ const App = () => {
             <Route exact path='/' component={Transactions}></Route>
             <Route exact path='/portfolio' component={Portfolio}></Route>
             <Route exact path='/login' component={Login}></Route>
+            <Route exact path='/signup' component={SignUp}></Route>
             <Redirect to='/'/>
         </Switch>
     </Layout>)

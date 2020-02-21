@@ -8,6 +8,7 @@ const NavItems = ({clicked}) =>{
                 <NavItem clicked={clicked} link='/'>Transactions</NavItem>
                 <NavItem clicked={clicked} link='/portfolio'>Portfolio</NavItem>
                 <NavItem clicked={clicked} link='/login'>Login</NavItem>
+                <NavItem clicked={clicked} link='/signup'>SignUp</NavItem>
             </ul>
         </nav>
     )
