@@ -5,17 +5,39 @@ import Portfolio from './containers/Portfolio'
 import Transactions from './containers/Transactions'
 import Login from './containers/Auth/Login'
 import SignUp from './containers/Auth/SignUp'
-const App = () => {
-    return (
-    <Layout>
-        <Switch>
+import {connect} from 'react-redux'
+// import { auth } from 'firebase'
+
+const App = (loggedIn) => {
+    let routes;
+    if (loggedIn){
+        routes=(
+            <Switch>
             <Route exact path='/' component={Transactions}></Route>
             <Route exact path='/portfolio' component={Portfolio}></Route>
-            <Route exact path='/login' component={Login}></Route>
-            <Route exact path='/signup' component={SignUp}></Route>
             <Redirect to='/'/>
-        </Switch>
+            </Switch>
+        )
+    }
+    else{
+        routes=(<Switch>
+        <Route exact path='/' component={Transactions}></Route>
+        <Route exact path='/login' component={Login}></Route>
+        <Route exact path='/signup' component={SignUp}></Route>
+        <Redirect to='/'/>
+        </Switch>)
+    }
+    return (
+    <Layout>
+        
+            {routes}
+        
     </Layout>)
 }
 
-export default App;
+const mapStateToProps=({firebase})=>({
+    loggedIn: firebase.auth.uid ? true :null
+})
+
+
+export default connect(mapStateToProps)(App);
