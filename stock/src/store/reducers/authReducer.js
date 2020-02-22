@@ -15,6 +15,8 @@ export default (state=initialState, {type,payload})=>{
                 return{...state, error: payload}
         case actions.AUTH_SUCCESS:
                 return{...state, error: false}
+        case actions.CLEAN_UP:
+            return{...state, error: null, loading: false}
         default:
             return state
     }
