@@ -6,6 +6,7 @@ import Transactions from './containers/Transactions'
 import Login from './containers/Auth/Login'
 import SignUp from './containers/Auth/SignUp'
 import {connect} from 'react-redux'
+import Logout from './containers/Auth/Logout'
 // import { auth } from 'firebase'
 
 const App = ({loggedIn}) => {
@@ -15,6 +16,7 @@ const App = ({loggedIn}) => {
             <Switch>
                 <Route exact path='/' component={Transactions}></Route>
                 <Route exact path='/portfolio' component={Portfolio}></Route>
+                <Route exact path='/logout' component={Logout}></Route>
                 <Redirect to='/'/>
             </Switch>
         )
