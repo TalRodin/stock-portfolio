@@ -8,24 +8,26 @@ import SignUp from './containers/Auth/SignUp'
 import {connect} from 'react-redux'
 // import { auth } from 'firebase'
 
-const App = (loggedIn) => {
+const App = ({loggedIn}) => {
     let routes;
     if (loggedIn){
         routes=(
             <Switch>
-            <Route exact path='/' component={Transactions}></Route>
-            <Route exact path='/portfolio' component={Portfolio}></Route>
-            <Redirect to='/'/>
+                <Route exact path='/' component={Transactions}></Route>
+                <Route exact path='/portfolio' component={Portfolio}></Route>
+                <Redirect to='/'/>
             </Switch>
         )
     }
     else{
-        routes=(<Switch>
-        <Route exact path='/' component={Transactions}></Route>
-        <Route exact path='/login' component={Login}></Route>
-        <Route exact path='/signup' component={SignUp}></Route>
-        <Redirect to='/'/>
-        </Switch>)
+        routes=(
+        <Switch>
+            <Route exact path='/' component={Transactions}></Route>
+            <Route exact path='/login' component={Login}></Route>
+            <Route exact path='/signup' component={SignUp}></Route>
+            <Redirect to='/'/>
+        </Switch>
+        )
     }
     return (
     <Layout>

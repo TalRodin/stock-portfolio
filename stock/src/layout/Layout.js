@@ -1,16 +1,20 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import {connect} from 'react-redux'
 
 
 
-
-const Layout = ({children}) =>(
+const Layout = ({children, loggedIn}) =>(
     <>
-      <Navbar/> 
+      <Navbar loggedIn={loggedIn}/> 
       <div>
           {children}
       </div>
     </>
 )
 
-export default Layout
+const mapStateToProps = ({firebase}) =>({
+  loggedIn: firebase.auth
+})
+
+export default connect(mapStateToProps)(Layout)

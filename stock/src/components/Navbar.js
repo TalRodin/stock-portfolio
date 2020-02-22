@@ -2,12 +2,12 @@ import React from 'react'
 import Logo from './Logo'
 import NavItems from './Navitems'
 
-const Navbar = ()=>{
+const Navbar = ({loggedIn})=>{
     return (
         <div>
         <Logo />
 
-        <NavItems />
+        <NavItems loggedIn={loggedIn}/>
         </div>
     )
 }
