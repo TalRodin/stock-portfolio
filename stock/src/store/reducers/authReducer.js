@@ -11,6 +11,8 @@ const initialState = {
 
 export default (state=initialState, {type,payload})=>{
     switch(type){
+        case actions.CLEAN_UP:
+            return{...state, error: null, loading: false, verifyEmail:{...state.verifyEmail, loading:false, error:null} }
         case actions.AUTH_START:
             return{...state, loading: true}
         case actions.AUTH_END:
@@ -19,14 +21,14 @@ export default (state=initialState, {type,payload})=>{
                 return{...state, error: payload}
         case actions.AUTH_SUCCESS:
                 return{...state, error: false}
-        case actions.CLEAN_UP:
-            return{...state, error: null, loading: false}
+        
         case actions.VERIFY_START:
             return{...state, verifyEmail:{...state.verifyEmail, loading:true}}
         case actions.VERIFY_SUCCESS:
             return{...state, verifyEmail:{...state.verifyEmail, loading:false, error:false}}
         case actions.VERIFY_FAIL:
             return{...state, verifyEmail:{...state.verifyEmail, loading:false, error:payload}}
+        
         default:
             return state
     }

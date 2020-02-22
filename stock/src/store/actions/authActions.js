@@ -58,7 +58,7 @@ export const clean =()=>({
 })
 
 export const verifyEmail = () =>async(dispatch,getState,{getFirebase})=>{
-    const firebase=getFirebase
+    const firebase=getFirebase()
     dispatch({type:actions.VERIFY_START})
     try{
         const user = firebase.auth().currentUser
@@ -66,6 +66,5 @@ export const verifyEmail = () =>async(dispatch,getState,{getFirebase})=>{
         dispatch({type:actions.VERIFY_SUCCESS})
     }catch(err){
         dispatch({type:actions.VERIFY_FAIL, payload:err.message})
-   
     }
 }

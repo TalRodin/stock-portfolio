@@ -18,10 +18,11 @@ const App = ({loggedIn,emailVerified}) => {
             <Switch>
                 <Route exact path='/verify-email' component={VerifyEmail}></Route>
                 <Route exact path='/logout' component={Logout}></Route>
+                <Redirect to='/verify-email'/>
             </Switch>
         )
     }
-    else if (loggedIn){
+    else if (loggedIn && emailVerified){
         routes=(
             <Switch>
                 <Route exact path='/' component={Transactions}></Route>
