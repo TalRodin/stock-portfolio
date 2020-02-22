@@ -7,11 +7,21 @@ import Login from './containers/Auth/Login'
 import SignUp from './containers/Auth/SignUp'
 import {connect} from 'react-redux'
 import Logout from './containers/Auth/Logout'
+import VerifyEmail from './containers/Auth/VerifyEmail'
+
 // import { auth } from 'firebase'
 
-const App = ({loggedIn}) => {
+const App = ({loggedIn,emailVerified}) => {
     let routes;
-    if (loggedIn){
+    if (loggedIn && !emailVerified){
+        routes=(
+            <Switch>
+                <Route exact path='/verify-email' component={VerifyEmail}></Route>
+                <Route exact path='/logout' component={Logout}></Route>
+            </Switch>
+        )
+    }
+    else if (loggedIn){
         routes=(
             <Switch>
                 <Route exact path='/' component={Transactions}></Route>
@@ -39,7 +49,8 @@ const App = ({loggedIn}) => {
 }
 
 const mapStateToProps=({firebase})=>({
-    loggedIn: firebase.auth.uid ? true :null
+    loggedIn: firebase.auth.uid,
+    emailVerified: firebase.auth.emailVerified
 })
 
 
