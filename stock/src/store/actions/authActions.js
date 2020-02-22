@@ -56,3 +56,16 @@ export const signIn = (data)=>async (
 export const clean =()=>({
     type: actions.CLEAN_UP
 })
+
+export const verifyEmail = () =>async(dispatch,getState,{getFirebase})=>{
+    const firebase=getFirebase
+    dispatch({type:actions.VERIFY_START})
+    try{
+        const user = firebase.auth().currentUser
+        await user.sendEmailVerification()
+        dispatch({type:actions.VERIFY_SUCCESS})
+    }catch(err){
+        dispatch({type:actions.VERIFY_FAIL, payload:err.message})
+   
+    }
+}

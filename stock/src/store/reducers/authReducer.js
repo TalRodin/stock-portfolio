@@ -2,7 +2,11 @@ import * as actions from '../actions/authTypes';
 
 const initialState = {
     error:null,
-    loading: false
+    loading: false,
+    verifyEmail:{
+        error:null,
+        loading: false
+    }
 }
 
 export default (state=initialState, {type,payload})=>{
@@ -17,6 +21,12 @@ export default (state=initialState, {type,payload})=>{
                 return{...state, error: false}
         case actions.CLEAN_UP:
             return{...state, error: null, loading: false}
+        case actions.VERIFY_START:
+            return{...state, verifyEmail:{...state.verifyEmail, loading:true}}
+        case actions.VERIFY_SUCCESS:
+            return{...state, verifyEmail:{...state.verifyEmail, loading:false, error:false}}
+        case actions.VERIFY_FAIL:
+            return{...state, verifyEmail:{...state.verifyEmail, loading:false, error:payload}}
         default:
             return state
     }
