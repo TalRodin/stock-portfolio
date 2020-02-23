@@ -1,9 +1,10 @@
 import React from 'react'
 import Form from '../components/getStock/Form'
 import Prices from '../components/getStock/Prices'
-
+import {firestoreConnect} from 'react-redux-firebase'
 import AddSymbol from './AddSymbol'
-
+import {compose} from 'redux'
+import {connect} from 'react-redux'
 // const Transactions = () =>{
 //     return <div>
 //         Transactions
@@ -46,7 +47,30 @@ class Transactions extends React.Component{
     }
 
     render(){
-        
+        // console.log(this.props)
+        // let id = this.props.userId
+        // console.log((this.props.symbols!==undefined)? this.props.symbols[id].todos.length : false)
+        // let content
+        // if(this.props.loading){
+        //         content = <p>Loading...</p>
+        //     }
+        // else if(this.props.fetched && this.props.symbols.todos.length===0){
+        //         content = <p>No bought stocks yet</p>
+        //     }
+        // else{
+        //     content = `${this.props.symbols[id].todos.length}`
+        //}
+        if(!this.props.symbols){
+            console.log('loading')
+        }
+        else if (!this.props.symbols[this.props.userId] && this.props.requested[`symbols/${this.props.userId}`]){
+            console.log('you heve no stocks')
+        }
+        else{
+            console.log('you have stocks')
+        }
+       
+
         return(
             <div>
             <Form getPrice={this.getPrice}/>
@@ -58,9 +82,24 @@ class Transactions extends React.Component{
             />
             <div>
                 <AddSymbol  />
+                {/* {content} */}
             </div>
             </div>
         )
     }
 }
-export default Transactions
+
+const mapStateToProps = ({firebase,firestore}) =>({
+    userId: firebase.auth.uid,
+    symbols: firestore.data.todos,
+    requesting:  firestore.status.requesting,
+    requested: firestore.status.requested
+})
+const mapDispatchToProps = {
+
+}
+
+export default compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    firestoreConnect(props=>[`todos/${props.userId}`]),
+    )(Transactions)
