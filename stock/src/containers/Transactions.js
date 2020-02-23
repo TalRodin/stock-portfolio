@@ -1,6 +1,9 @@
 import React from 'react'
 import Form from '../components/getStock/Form'
 import Prices from '../components/getStock/Prices'
+
+import AddSymbol from './AddSymbol'
+
 // const Transactions = () =>{
 //     return <div>
 //         Transactions
@@ -53,6 +56,9 @@ class Transactions extends React.Component{
             volume={this.state.volume}
             error={this.state.error}
             />
+            <div>
+                <AddSymbol  />
+            </div>
             </div>
         )
     }
