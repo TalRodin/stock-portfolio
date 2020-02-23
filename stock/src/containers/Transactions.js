@@ -5,6 +5,8 @@ import {firestoreConnect} from 'react-redux-firebase'
 import AddSymbol from './AddSymbol'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
+import Symbol from './Symbol'
+
 // const Transactions = () =>{
 //     return <div>
 //         Transactions
@@ -47,7 +49,7 @@ class Transactions extends React.Component{
     }
 
     render(){
-        // console.log(this.props)
+        console.log(this)
         // let id = this.props.userId
         // console.log((this.props.symbols!==undefined)? this.props.symbols[id].todos.length : false)
         // let content
@@ -60,14 +62,15 @@ class Transactions extends React.Component{
         // else{
         //     content = `${this.props.symbols[id].todos.length}`
         //}
+        let content;
         if(!this.props.symbols){
-            console.log('loading')
+            content = <p>Loading...</p>
         }
-        else if (!this.props.symbols[this.props.userId] && this.props.requested[`symbols/${this.props.userId}`]){
-            console.log('you heve no stocks')
+        else if (!this.props.symbols[this.props.userId] && this.props.requested[`todos/${this.props.userId}`]){
+            content = <p>No bought stocks yet</p>
         }
         else{
-            console.log('you have stocks')
+            content = this.props.symbols[this.props.userId].todos.map(symbol=><Symbol key={symbol.id} symbol={symbol}></Symbol>)
         }
        
 
@@ -82,7 +85,7 @@ class Transactions extends React.Component{
             />
             <div>
                 <AddSymbol  />
-                {/* {content} */}
+                {content}
             </div>
             </div>
         )

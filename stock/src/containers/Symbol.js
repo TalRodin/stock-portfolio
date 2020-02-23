@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Symbol = ({todo}) =>{
+const Symbol = ({symbol}) =>{
     return (
         <div>
-            {todo.symbol}
+            {symbol.symbol} -- {symbol.quantity}@{symbol.price}
+
         </div>
     )
 }
