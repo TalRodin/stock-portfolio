@@ -20,6 +20,12 @@
     "styled-components": "^5.0.1",
     "yup": "^0.28.1"
   },
+  "engines": {
+    "node": "10.15.0"
+  },
+  "babel": {
+    "presets": [ "es2015", "react" ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
